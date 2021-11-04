@@ -14,10 +14,14 @@ public class Customer {
 	private String customerAdres;
 	private double customerTax;
 	private String customerCompany;
-	private Seller s;
 	Map<Product,Integer> basket;
+	List<Invoice> invoices;
 	
 	
+	public void clearInvoices()
+	{
+		invoices.removeAll(invoices);
+	}
 
 	public Customer(String customerName, String customerSurName, int customerNIP, String customerAdres,
 			double customerTax, String customerCompany) {
@@ -29,13 +33,14 @@ public class Customer {
 		this.customerTax = customerTax;
 		this.customerCompany = customerCompany;
 		basket = new HashMap();
+		invoices = new ArrayList<>();
 	}
 	
 	public Invoice toInvoice(Seller s)
 	{
-		this.s = s;
+		
 		List<Element> elements = new ArrayList<>();
-		Invoice i = new Invoice(this);
+		Invoice i = new Invoice(this,s);
 		Date date = new Date();
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		i.setInvoiceDate(date);
@@ -58,22 +63,21 @@ public class Customer {
 			
 		}
 		i.setElements(elements);
+		invoices.add(i);
 		return i;
 	}
 
-	public Map<Product, Integer> getBasket() {
-		return basket;
+
+	
+	public List<Invoice> getInvoices() {
+		return invoices;
 	}
 
-	public Seller getS() {
-		return s;
-	}
-	
 	public void addToBasket(Product p,int prodNum)
 	{
 		Integer el = basket.get(p);
 		if(el != null)
-			basket.replace(p,el+prodNum);
+			basket.replace(p, el,el+prodNum);
 		else if (el == null)
 			basket.put(p, prodNum);
 	}

@@ -9,11 +9,13 @@ public class Invoice {
 	private static int invoiceNumber;
 	private List<Element> elements;
 	private Customer customer;
+	private Seller s;
 	
 	public Invoice() {}
-	public Invoice(Customer c)
+	public Invoice(Customer c,Seller s)
 	{
 		customer = c;
+		this.s = s;
 		
 	}
 	
@@ -65,7 +67,7 @@ public class Invoice {
 			System.out.println("Price netto: "+el.getPriceNet() + "/ Gross = "+el.getPriceGross());
 		}
 		System.out.println("\n Customer : " + customer.toString());
-		System.out.println("Seller: " + customer.getS().toString());
+		System.out.println("Seller: " + s.toString());
 		System.out.println("Total NETTO: "+getTotalNet() + "/GROSS : "+getTotalGross());
 	}
 	

@@ -2,6 +2,7 @@ package faktura;
 
 import java.util.*;
 
+
 /**
  * Example
  *
@@ -23,5 +24,27 @@ public class App
         tc.addToBasket(testProd2, 5);
         Invoice testInvoice =  tc.toInvoice(testSeller);
         testInvoice.printInvoice();
+        
+        System.out.println("Remove Coca-cola 1.5l from basket Creating new invoice\n___________________________\n");
+        tc.removeFromBasket(testProd4);
+       testInvoice =tc.toInvoice(testSeller);
+       testInvoice.printInvoice();
+       // testInvoice.getElements().remove(1);
+       System.out.println("\n\nCreated new customer ");
+       Customer tc2 = new Customer("Janusz", "Nie Kowalski", 53534, "Jakis tam inny adres", 23,"Jakas tam inna firma");
+       tc2.addToBasket(testProd3, 2);
+       tc2.addToBasket(testProd3, 3);
+       testInvoice = tc2.toInvoice(testSeller);
+       System.out.println("Invoice of the second customer:");
+       testInvoice.printInvoice();
+       System.out.println("\nCustomer 1 have : "+tc.getInvoices().size()+" invoices stored");
+       System.out.println("Customer 2 have : "+tc2.getInvoices().size()+" invoices stored");
+       System.out.println("Delete invoices for Customer2 ");
+       tc2.clearInvoices();
+       System.out.println("\nCustomer  have : "+tc2.getInvoices().size()+" invoices stored");
+       
+
+
+        
     }
 }
